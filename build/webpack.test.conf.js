@@ -1,5 +1,6 @@
 // This is the webpack config used for unit tests.
 
+var path = require('path')
 var utils = require('./utils')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
@@ -24,9 +25,17 @@ var webpackConfig = merge(baseConfig, {
     }
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      'Drupal': [path.resolve(__dirname, './drupal-fixture'), 'default']
+    }),
     new webpack.DefinePlugin({
       'process.env': require('../config/test.env')
-    })
+    }),
+    // element-ui: replace default Chinese strings with English strings.
+    new webpack.NormalModuleReplacementPlugin(
+      /element-ui[\/\\]lib[\/\\]locale[\/\\]lang[\/\\]zh-CN/,
+      'element-ui/lib/locale/lang/en'
+    )
   ]
 })
 

@@ -1,3 +1,4 @@
+var path = require('path')
 var utils = require('./utils')
 var webpack = require('webpack')
 var config = require('../config')
@@ -23,9 +24,17 @@ module.exports = merge(baseWebpackConfig, {
   // cheap-module-eval-source-map is faster for development
   devtool: '#cheap-module-eval-source-map',
   plugins: [
+    new webpack.ProvidePlugin({
+      'Drupal': [path.resolve(__dirname, './drupal-fixture'), 'default']
+    }),
     new webpack.DefinePlugin({
       'process.env': config.dev.env
     }),
+    // element-ui: replace default Chinese strings with English strings.
+    new webpack.NormalModuleReplacementPlugin(
+      /element-ui[\/\\]lib[\/\\]locale[\/\\]lang[\/\\]zh-CN/,
+      'element-ui/lib/locale/lang/en'
+    ),
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),

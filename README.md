@@ -16,8 +16,8 @@ campaignion_my_module
  │
  ├── js (drupal_add_js from here)
  │    ├── my_vue_app
- │    │    ├── app.min.js
- │    │    └── app.js.map
+ │    │    ├── app.vue.min.js
+ │    │    └── app.vue.js.map
  │    └── some_behavior.js
  │
  ├── css (drupal_add_css from here)
@@ -29,18 +29,23 @@ campaignion_my_module
  └── campaignion_my_module.module
 ```
 
-Don’t forget to add campaignion_vue:
+You don’t have to add the assets campaignion_vue provides, it adds them when it detects Vue apps that have the extensions `.vue.min.js`. So all you have to do is enable campaignion_vue and
 ```
 drupal_add_js(
-  drupal_get_path('module', 'campaignion_vue') . '/js/campaignion_vue.min.js',
-  {'scope' => 'footer', 'preprocess' => FALSE}
-);
-drupal_add_js(
-  drupal_get_path('module', 'campaignion_my_module') . '/js/my_vue_app/app.min.js',
+  drupal_get_path('module', 'campaignion_my_module') . '/js/my_vue_app/app.vue.min.js',
   {'scope' => 'footer', 'preprocess' => FALSE}
 );
 ```
+and campaignion_vue will automatically add all the assets you need.
 
+## Dev mode
+
+If you need to preview your app inside Campaignion, you have to run `npm run build` or `yarn build` and reload the page in the browser.
+For faster development using hot module replacement you can run `yarn dev` and visit `localhost:8080`. All you need from the `Drupal` global is stubbed via `build/drupal-fixture.js`. API calls to Drupal won’t work though.
+
+## Production mode
+
+In production mode, Webpack is configured to leave certain vendor libraries out of the bundle and take them from the `campaignion_vue` global provided by the `campaignion_vue` module.
 
 ## Build Setup
 
