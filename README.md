@@ -1,7 +1,7 @@
 # campaignion_vue_project
 
 Template for Vue apps in Campaignion.
-Replace `messages_app` with your app’s name.
+Replace `my_vue_app` with your app’s name.
 
 Webpack compiles js and css into the respective module subdirectories:
 ```
@@ -16,13 +16,13 @@ campaignion_my_module
  │
  ├── js (drupal_add_js from here)
  │    ├── my_vue_app
- │    │    ├── app.vue.min.js
- │    │    └── app.vue.js.map
+ │    │    ├── my_vue_app.vue.min.js
+ │    │    └── my_vue_app.vue.js.map
  │    └── some_behavior.js
  │
  ├── css (drupal_add_css from here)
  │    ├── my_vue_app
- │    │    └── app.css
+ │    │    └── my_vue_app.css
  │    └── my_module_styles.js
  │
  ├── campaignion_my_module.info

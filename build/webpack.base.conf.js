@@ -9,7 +9,7 @@ function resolve (dir) {
 
 module.exports = {
   entry: {
-    app: './src/main.js'
+    my_vue_app: './src/main.js' // The key is used as the name for output files.
   },
   output: {
     path: config.build.assetsRoot,
